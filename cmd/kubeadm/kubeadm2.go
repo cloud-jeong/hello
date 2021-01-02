@@ -3,7 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"k8s.io/klog/v2"
 )
+
+type Kube interface {
+	DoSome(arg string) string
+}
 
 // Data is data
 type Data struct {
@@ -14,7 +19,48 @@ type Data struct {
 	Temp string `json:"-"`
 }
 
+func (d *Data) DoSome(arg string) string {
+	return arg
+}
+
+func (d *Data) DoSome1(arg string) string {
+	return arg
+}
+
+func (d *Data) init() {
+	d.Name = "cloud.jung"
+	d.Age = 30
+	d.Etc1 = ""
+	d.Etc2 = ""
+	d.Temp = ""
+}
+
+func NewData(name string) *Data {
+	data := &Data{
+		Name: name,
+		Age:  10,
+		Etc1: "",
+		Etc2: "",
+		Temp: "",
+	}
+
+	//data.init()
+	return data
+}
+
+func (d *Data) GetInstance() *Data {
+	return nil
+}
+
 func main() {
+	var aa Kube
+	aa = NewData("cloud.jung@acronsoft.io")
+	klog.Infoln(aa.DoSome("aaaaaa"))
+
+	klog.Infoln("[version] retrieving version info")
+
+	d := NewData("cloud.jung@acronsoft.io")
+	klog.Infoln(d.Name)
 
 	var jobj = Data{Name: "aaa", Age: 19, Etc1: "bbb", Etc2: "", Temp: "1123123"}
 	jstrbyte, _ := json.Marshal(jobj)

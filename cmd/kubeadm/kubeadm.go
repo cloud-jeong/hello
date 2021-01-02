@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/lithammer/dedent"
+)
 
 type Vertex struct {
 	Lat, Long float64
@@ -35,4 +38,12 @@ func main() {
 	}
 	fmt.Println(m["Bell Labs"])
 
+	ss := `
+		Lorem ipsum dolor sit amet,
+		consectetur adipiscing elit.
+		Curabitur justo tellus, facilisis nec efficitur dictum,
+		fermentum vitae ligula. Sed eu convallis sapien.`
+	fmt.Println(dedent.Dedent(ss))
+	fmt.Println("-------------")
+	fmt.Println(s)
 }
