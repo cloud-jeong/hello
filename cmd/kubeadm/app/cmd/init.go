@@ -4,6 +4,7 @@ import (
 	kubeadmapi "github.com/cloud-jeong/sandbox/cmd/kubeadm/app/apis/kubeadm"
 	kubeadmapiv1beta2 "github.com/cloud-jeong/sandbox/cmd/kubeadm/app/apis/kubeadm/v1beta2"
 	"github.com/cloud-jeong/sandbox/cmd/kubeadm/app/cmd/options"
+	cmdutil "github.com/cloud-jeong/sandbox/cmd/kubeadm/app/cmd/util"
 	kubeadmconstants "github.com/cloud-jeong/sandbox/cmd/kubeadm/app/constants"
 	phases "github.com/cloud-jeong/sandbox/cmd/kubeadm/app/phases/init"
 	"github.com/lithammer/dedent"
@@ -211,7 +212,7 @@ func showJoinCommand(i *initData, out io.Writer) error {
 
 	for _, token := range i.tokens() {
 		if err := printJoinCommand(out, adminKubeConfigPath, token, i); err != nil {
-			return errors.Wrap(err, "failed to print join command")
+			return error.Wrap(err, "failed to print join command")
 		}
 	}
 
